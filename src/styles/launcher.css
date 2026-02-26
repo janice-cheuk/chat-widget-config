@@ -1,0 +1,83 @@
+/* Launcher wave animation */
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.3);
+    opacity: 0.6;
+  }
+}
+
+@keyframes wave-delay-1 {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.3);
+    opacity: 0.6;
+  }
+}
+
+@keyframes wave-delay-2 {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.3);
+    opacity: 0.6;
+  }
+}
+
+.launcher-wave {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  justify-content: center;
+}
+
+.launcher-wave-bar {
+  width: 3px;
+  height: 16px;
+  background-color: currentColor;
+  border-radius: 2px;
+  animation: wave 1.6s infinite ease-in-out;
+}
+
+.launcher-wave-bar:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.launcher-wave-bar:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.launcher-wave-bar:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .launcher-wave-bar {
+    animation: none;
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* Pause animation when document is hidden */
+.launcher-wave.paused .launcher-wave-bar {
+  animation-play-state: paused;
+}
+
+/* Launcher transitions */
+.launcher-transition {
+  transition: all 200ms ease-out;
+}
+
