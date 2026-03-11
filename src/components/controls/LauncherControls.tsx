@@ -23,14 +23,15 @@ export function LauncherControls({
   onVisibilityChange,
   onPositionChange,
 }: LauncherControlsProps) {
+  const labelStyle = { fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: "#25252A", fontFamily: "Inter, sans-serif" } as const;
+  const inputStyle = { height: 36, paddingLeft: 12, paddingRight: 12, border: "1px solid #DEE5EB", borderRadius: 8, fontSize: 14, fontWeight: 425, color: "#25252A", fontFamily: "Inter, sans-serif" };
+
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4">
       {/* Launcher Icon */}
-      <div>
-        <label className="text-sm font-semibold leading-[155%] text-[#25252A] mb-2 block">
-          Launcher icon
-        </label>
-        <div className="space-y-2">
+      <div className="flex flex-col gap-2">
+        <label style={labelStyle}>Launcher icon</label>
+        <div className="flex flex-col gap-2">
           {(
             [
               { value: "animatedWave" as const, label: "Animated wave" },
@@ -38,10 +39,7 @@ export function LauncherControls({
               { value: "custom" as const, label: "Use your own" },
             ] as const
           ).map(({ value, label }) => (
-            <label
-              key={value}
-              className="flex items-center gap-2 cursor-pointer"
-            >
+            <label key={value} className="flex items-center gap-2 cursor-pointer">
               <input
                 type="radio"
                 name="launcher-icon"
@@ -50,28 +48,18 @@ export function LauncherControls({
                 onChange={() => onIconChange(value)}
                 className="w-[14px] h-[14px]"
               />
-              <span className="text-sm font-normal leading-[14px] text-[#25252A]">
-                {label}
-              </span>
+              <span style={{ fontSize: 14, color: "#25252A", fontFamily: "Inter, sans-serif" }}>{label}</span>
             </label>
           ))}
         </div>
         {icon === "custom" && (
           <div className="mt-2">
-            <label className="px-4 py-2 h-[38px] border border-[#DEE5EB] rounded-lg text-sm font-semibold leading-[155%] text-[#25252A] bg-white cursor-pointer hover:bg-gray-50 flex items-center gap-2 w-fit">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                className="text-[#25252A]"
-              >
-                <path
-                  d="M8 2V14M2 8H14"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
+            <label
+              className="border border-solid rounded-lg bg-white cursor-pointer hover:bg-gray-50 flex items-center gap-2 w-fit"
+              style={{ ...inputStyle, fontWeight: 550 }}
+            >
+              <svg width={16} height={16} viewBox="0 0 16 16" fill="none" style={{ color: "#25252A" }}>
+                <path d="M8 2V14M2 8H14" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" />
               </svg>
               Upload File
               <input
@@ -80,9 +68,7 @@ export function LauncherControls({
                 className="hidden"
                 onChange={(e) => {
                   const file = e.target.files?.[0];
-                  if (file) {
-                    onCustomIconFileSelect(file);
-                  }
+                  if (file) onCustomIconFileSelect(file);
                 }}
               />
             </label>
@@ -91,31 +77,17 @@ export function LauncherControls({
       </div>
 
       {/* Launcher Visibility */}
-      <div>
-        <label className="text-sm font-semibold leading-[155%] text-[#25252A] mb-2 block">
-          Launcher visibility
-        </label>
-        <div className="space-y-2">
+      <div className="flex flex-col gap-2">
+        <label style={labelStyle}>Launcher visibility</label>
+        <div className="flex flex-col gap-2">
           {(
             [
-              {
-                value: "prominent" as const,
-                label: "Prominent: Pill stays still",
-              },
-              {
-                value: "hybrid" as const,
-                label: "Hybrid: Pill transitions to circle after 5 seconds",
-              },
-              {
-                value: "minimal" as const,
-                label: "Minimal: Circle",
-              },
+              { value: "prominent" as const, label: "Prominent: Pill stays still" },
+              { value: "hybrid" as const, label: "Hybrid: Pill transitions to circle after 5 seconds" },
+              { value: "minimal" as const, label: "Minimal: Circle" },
             ] as const
           ).map(({ value, label }) => (
-            <label
-              key={value}
-              className="flex items-center gap-2 cursor-pointer"
-            >
+            <label key={value} className="flex items-center gap-2 cursor-pointer">
               <input
                 type="radio"
                 name="launcher-visibility"
@@ -124,25 +96,20 @@ export function LauncherControls({
                 onChange={() => onVisibilityChange(value)}
                 className="w-[14px] h-[14px]"
               />
-              <span className="text-sm font-normal leading-[14px] text-[#25252A]">
-                {label}
-              </span>
+              <span style={{ fontSize: 14, color: "#25252A", fontFamily: "Inter, sans-serif" }}>{label}</span>
             </label>
           ))}
         </div>
       </div>
 
       {/* Position */}
-      <div>
-        <label className="text-sm font-semibold leading-[155%] text-[#25252A] mb-2 block">
-          Position
-        </label>
+      <div className="flex flex-col gap-2">
+        <label style={labelStyle}>Position</label>
         <select
           value={position}
-          onChange={(e) =>
-            onPositionChange(e.target.value as "bottom-right" | "bottom-left")
-          }
-          className="w-full px-3 py-2 h-[38px] border border-[#DEE5EB] rounded-lg text-sm font-normal leading-[155%] text-[#25252A] bg-white"
+          onChange={(e) => onPositionChange(e.target.value as "bottom-right" | "bottom-left")}
+          className="w-full border border-solid rounded-lg bg-white outline-none"
+          style={inputStyle}
         >
           <option value="bottom-right">bottom right</option>
           <option value="bottom-left">bottom left</option>

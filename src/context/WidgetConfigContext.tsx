@@ -30,8 +30,14 @@ const WidgetConfigContext = createContext<{
   updateConfig: (updates: Partial<WidgetConfig>) => void;
 } | null>(null);
 
-export function WidgetConfigProvider({ children }: { children: ReactNode }) {
-  const [config, setConfig] = useState<WidgetConfig>(defaultConfig);
+export function WidgetConfigProvider({
+  children,
+  initialConfig,
+}: {
+  children: ReactNode;
+  initialConfig?: WidgetConfig;
+}) {
+  const [config, setConfig] = useState<WidgetConfig>(initialConfig ?? defaultConfig);
 
   const updateConfig = (updates: Partial<WidgetConfig>) => {
     setConfig((prev) => ({ ...prev, ...updates }));

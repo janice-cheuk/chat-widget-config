@@ -59,66 +59,57 @@ export function ConfigPanel() {
 
   return (
     <div
-      className="bg-[#F8F9FA] rounded-2xl config-panel"
+      className="config-panel flex flex-col items-start w-full min-h-full flex-shrink-0 overflow-hidden rounded-2xl"
       style={{
-        display: "flex",
-        padding: "1.25rem",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        gap: "var(--Spacing-XL, 1.5rem)",
-        flexShrink: 0,
-        alignSelf: "stretch",
-        width: "100%",
-        minHeight: "100%",
+        backgroundColor: "#F8F9FA",
+        padding: 12,
+        gap: 24,
+        fontFamily: "Inter, sans-serif",
       }}
     >
-      {/* Style Section */}
-      <div className="w-full">
+      {/* Style Section — Figma 996:25324 accordion */}
+      <div className="w-full flex flex-col">
         <div
-          className="flex items-center justify-between mb-2 cursor-pointer"
+          className="flex items-center justify-between cursor-pointer border-b border-solid flex-shrink-0 w-full"
+          style={{
+            height: 69,
+            paddingLeft: 8,
+            paddingRight: 8,
+            paddingTop: 12,
+            paddingBottom: 12,
+            borderColor: "#DEE5EB",
+          }}
           onClick={() => toggleSection("style")}
         >
           <div className="flex items-center gap-2">
             <div className="w-[18px] h-[18px] flex items-center justify-center">
-              <img
-                src="/icons/palette.svg"
-                alt="Palette"
-                className="w-[18px] h-[18px]"
-              />
+              <img src="/icons/palette.svg" alt="Palette" className="w-[18px] h-[18px]" />
             </div>
-            <h2 className="text-base font-semibold leading-[155%] text-[#25252A]">
+            <h2 style={{ fontSize: 16, fontWeight: 550, lineHeight: 1.55, color: "#25252A" }}>
               Style
             </h2>
           </div>
           <svg
-            width="24"
-            height="24"
+            width={24}
+            height={24}
             viewBox="0 0 24 24"
             fill="none"
-            className={`transition-transform ${
-              expandedSections.style ? "rotate-180" : ""
-            }`}
+            className={`transition-transform ${expandedSections.style ? "rotate-180" : ""}`}
           >
-            <path
-              d="M6 9L12 15L18 9"
-              stroke="#000000"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+            <path d="M6 9L12 15L18 9" stroke="#25252A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
         {expandedSections.style && (
-          <div className="space-y-6 pt-6">
-            {/* Theme Section */}
-            <div className="w-full">
-              <h3 className="text-base font-semibold leading-[155%] text-[#25252A] mb-2">
+          <div className="w-full flex flex-col gap-2 pt-0" style={{ paddingLeft: 8, paddingRight: 8, paddingTop: 8 }}>
+            {/* Theme */}
+            <div className="w-full flex flex-col gap-2">
+              <h3 style={{ fontSize: 16, fontWeight: 550, lineHeight: 1.55, color: "#25252A", margin: 0 }}>
                 Theme
               </h3>
-              <p className="text-xs font-normal leading-[155%] text-[#5D666F] mb-2">
+              <p style={{ fontSize: 12, fontWeight: 425, lineHeight: 1.55, color: "#5D666F", margin: 0 }}>
                 Choose visual theme that fits your brand
               </p>
-              <div className="flex gap-1 w-full">
+              <div className="flex gap-1 w-full overflow-hidden rounded-lg" style={{ gap: 4 }}>
                 {(["vibrant", "minimalist", "glass"] as Theme[]).map((theme) => (
                   <ThemeCard
                     key={theme}
@@ -130,39 +121,44 @@ export function ConfigPanel() {
               </div>
             </div>
 
-            {/* Brand Color Section */}
-            <div className="w-full">
-              <h3 className="text-base font-semibold leading-[155%] text-[#25252A] mb-2">
+            {/* Brand Color — Figma container h-58, gap 12, px 13 */}
+            <div className="w-full flex flex-col gap-2">
+              <h3 style={{ fontSize: 16, fontWeight: 550, lineHeight: 1.55, color: "#25252A", margin: 0 }}>
                 Brand Color
               </h3>
-              <div className="flex items-center gap-3 px-3 py-0 h-[58px] bg-white border border-[#DEE5EB] rounded-lg">
+              <div
+                className="flex items-center bg-white border border-solid rounded-lg flex-shrink-0 w-full"
+                style={{ height: 58, gap: 12, paddingLeft: 13, paddingRight: 13, borderColor: "#DEE5EB" }}
+              >
                 <input
                   type="color"
                   value={config.brandColor}
                   onChange={(e) => updateConfig({ brandColor: e.target.value })}
-                  className="w-8 h-8 border border-[#DEE5EB] rounded cursor-pointer"
-                  style={{ backgroundColor: config.brandColor }}
+                  className="border border-[#DEE5EB] rounded cursor-pointer flex-shrink-0"
+                  style={{ width: 32, height: 32, backgroundColor: config.brandColor, borderRadius: 4 }}
                 />
                 <input
                   type="text"
                   value={config.brandColor}
                   onChange={(e) => updateConfig({ brandColor: e.target.value })}
-                  className="flex-1 text-sm font-normal leading-[17px] text-[#5D666F] border-0 outline-none bg-transparent"
+                  className="flex-1 min-w-0 border-0 outline-none bg-transparent"
+                  style={{ fontSize: 14, color: "#5D666F", fontFamily: "Inter, sans-serif" }}
                 />
               </div>
             </div>
 
-            {/* UI Roundness Section */}
-            <div className="w-full">
-              <div className="flex items-center gap-2 mb-2">
-                <h3 className="text-base font-semibold leading-[155%] text-[#25252A]">
-                  UI Roundness
-                </h3>
-              </div>
-              <p className="text-xs font-normal leading-[155%] text-[#5D666F] mb-2">
+            {/* UI Roundness — Figma button group bg #EBF0F5, gap 4, p 4, rounded 8 */}
+            <div className="w-full flex flex-col gap-2">
+              <h3 style={{ fontSize: 16, fontWeight: 550, lineHeight: 1.55, color: "#25252A", margin: 0 }}>
+                UI Roundness
+              </h3>
+              <p style={{ fontSize: 12, fontWeight: 425, lineHeight: 1.55, color: "#5D666F", margin: 0 }}>
                 Choose how rounded or squared the UI elements appear
               </p>
-              <div className="flex gap-1 p-1 bg-[#EBF0F5] rounded-lg">
+              <div
+                className="flex overflow-hidden rounded-lg flex-shrink-0 w-full"
+                style={{ gap: 4, padding: 4, backgroundColor: "#EBF0F5" }}
+              >
                 {(
                   [
                     { value: "circle", name: "Circle", label: "Ultra rounded" },
@@ -174,36 +170,50 @@ export function ConfigPanel() {
                   <button
                     key={value}
                     onClick={() => updateConfig({ roundness: value })}
-                    className={`flex-1 px-4 py-1 h-[49px] rounded-lg transition-colors flex flex-col items-center justify-center ${
-                      config.roundness === value
-                        ? "bg-white text-[#205AE3]"
-                        : "bg-transparent text-[#25252A]"
-                    }`}
+                    className="flex-1 rounded-lg transition-colors flex flex-col items-center justify-center min-h-0"
+                    style={{
+                      paddingLeft: 16,
+                      paddingRight: 16,
+                      paddingTop: 4,
+                      paddingBottom: 4,
+                      backgroundColor: config.roundness === value ? "#FFFFFF" : "transparent",
+                      fontFamily: "Inter, sans-serif",
+                    }}
                   >
-                    <span className="text-sm font-semibold leading-[155%]">{name}</span>
-                    <span className="text-xs font-normal leading-[155%]">{label}</span>
+                    <span style={{ fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: config.roundness === value ? "#205AE3" : "#25252A" }}>{name}</span>
+                    <span style={{ fontSize: 12, fontWeight: 425, lineHeight: 1.55, color: "#5D666F" }}>{label}</span>
                   </button>
                 ))}
               </div>
             </div>
 
-            {/* Typography Section */}
-            <div className="w-full">
-              <div className="flex items-center gap-2 mb-3">
-                <h3 className="text-base font-semibold leading-[155%] text-[#25252A]">
-                  Typography
-                </h3>
-              </div>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <label className="text-sm font-semibold leading-[155%] text-[#25252A]">
+            {/* Typography — Figma 14px labels, dropdown 329px, px 12 py 8, rounded 8 */}
+            <div className="w-full flex flex-col gap-2">
+              <h3 style={{ fontSize: 16, fontWeight: 550, lineHeight: 1.55, color: "#25252A", margin: 0 }}>
+                Typography
+              </h3>
+              <div className="flex flex-col gap-3 w-full">
+                <div className="flex items-center justify-between w-full gap-4">
+                  <label style={{ fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: "#25252A", fontFamily: "Inter, sans-serif" }}>
                     Font Family:
                   </label>
                   <select
                     value={config.fontFamily}
                     onChange={(e) => updateConfig({ fontFamily: e.target.value })}
-                    className="px-3 py-2 w-[329px] h-[38px] border border-[#DEE5EB] rounded-lg text-sm font-normal leading-[155%] text-[#25252A] bg-white"
-                    style={{ fontFamily: "Inter, sans-serif" }}
+                    className="border border-solid rounded-lg bg-white flex-shrink-0"
+                    style={{
+                      width: 329,
+                      height: 38,
+                      paddingLeft: 12,
+                      paddingRight: 12,
+                      paddingTop: 8,
+                      paddingBottom: 8,
+                      borderColor: "#DEE5EB",
+                      fontSize: 14,
+                      fontWeight: 425,
+                      color: "#25252A",
+                      fontFamily: "Inter, sans-serif",
+                    }}
                   >
                     <option value='Inter, sans-serif'>Inter</option>
                     <option value='Arial, sans-serif'>Arial</option>
@@ -213,18 +223,27 @@ export function ConfigPanel() {
                     <option value='"Courier New", Courier, monospace'>Courier New</option>
                   </select>
                 </div>
-                <div className="flex items-center justify-between">
-                  <label className="text-sm font-semibold leading-[155%] text-[#25252A]">
+                <div className="flex items-center justify-between w-full gap-4">
+                  <label style={{ fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: "#25252A", fontFamily: "Inter, sans-serif" }}>
                     Font Size:
                   </label>
                   <select
                     value={config.fontSize}
-                    onChange={(e) =>
-                      updateConfig({
-                        fontSize: e.target.value as "sm" | "md" | "lg",
-                      })
-                    }
-                    className="px-3 py-2 w-[329px] h-[38px] border border-[#DEE5EB] rounded-lg text-sm font-normal leading-[155%] text-[#25252A] bg-white"
+                    onChange={(e) => updateConfig({ fontSize: e.target.value as "sm" | "md" | "lg" })}
+                    className="border border-solid rounded-lg bg-white flex-shrink-0"
+                    style={{
+                      width: 329,
+                      height: 38,
+                      paddingLeft: 12,
+                      paddingRight: 12,
+                      paddingTop: 8,
+                      paddingBottom: 8,
+                      borderColor: "#DEE5EB",
+                      fontSize: 14,
+                      fontWeight: 425,
+                      color: "#25252A",
+                      fontFamily: "Inter, sans-serif",
+                    }}
                   >
                     <option value="sm">Small</option>
                     <option value="md">Medium</option>
@@ -237,109 +256,79 @@ export function ConfigPanel() {
         )}
       </div>
 
-      {/* Launcher Experience Section */}
-      <div className="w-full">
+      {/* Launcher Experience — Figma accordion */}
+      <div className="w-full flex flex-col">
         <div
-          className="flex items-center justify-between mb-2 cursor-pointer"
+          className="flex items-center justify-between cursor-pointer border-b border-solid flex-shrink-0 w-full"
+          style={{ height: 69, paddingLeft: 8, paddingRight: 8, paddingTop: 12, paddingBottom: 12, borderColor: "#DEE5EB" }}
           onClick={() => toggleSection("launcher")}
         >
           <div className="flex items-center gap-2">
             <div className="w-[18px] h-[18px] flex items-center justify-center">
-              <img
-                src="/icons/rocket.svg"
-                alt="Rocket"
-                className="w-[18px] h-[18px]"
-              />
+              <img src="/icons/rocket.svg" alt="Rocket" className="w-[18px] h-[18px]" />
             </div>
-            <h2 className="text-base font-semibold leading-[155%] text-[#25252A]">
-              Launcher experience
+            <h2 style={{ fontSize: 16, fontWeight: 550, lineHeight: 1.55, color: "#25252A" }}>
+              Launcher Experience
             </h2>
           </div>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            className={`transition-transform ${
-              expandedSections.launcher ? "rotate-180" : ""
-            }`}
-          >
-            <path
-              d="M6 9L12 15L18 9"
-              stroke="#000000"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+          <svg width={24} height={24} viewBox="0 0 24 24" fill="none" className={`transition-transform ${expandedSections.launcher ? "rotate-180" : ""}`}>
+            <path d="M6 9L12 15L18 9" stroke="#25252A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
         {expandedSections.launcher && (
-          <div className="space-y-6 pt-6">
-            <div className="w-full">
-              <label className="text-sm font-semibold leading-[155%] text-[#25252A] mb-2 block">
+          <div className="w-full flex flex-col gap-2 pt-2" style={{ paddingLeft: 8, paddingRight: 8, paddingTop: 8 }}>
+            <div className="w-full flex flex-col gap-2">
+              <label style={{ fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: "#25252A", fontFamily: "Inter, sans-serif" }}>
                 Launcher Color
               </label>
-              <div className="flex items-center gap-3 px-3 py-0 h-[58px] bg-white border border-[#DEE5EB] rounded-lg">
+              <div
+                className="flex items-center bg-white border border-solid rounded-lg w-full"
+                style={{ height: 58, gap: 12, paddingLeft: 13, paddingRight: 13, borderColor: "#DEE5EB" }}
+              >
                 <input
                   type="color"
                   value={config.launcher.color}
-                  onChange={(e) =>
-                    updateConfig({
-                      launcher: { ...config.launcher, color: e.target.value },
-                    })
-                  }
-                  className="w-8 h-8 border border-[#DEE5EB] rounded cursor-pointer"
-                  style={{ backgroundColor: config.launcher.color }}
+                  onChange={(e) => updateConfig({ launcher: { ...config.launcher, color: e.target.value } })}
+                  className="border border-[#DEE5EB] rounded cursor-pointer flex-shrink-0"
+                  style={{ width: 32, height: 32, backgroundColor: config.launcher.color, borderRadius: 4 }}
                 />
                 <input
                   type="text"
                   value={config.launcher.color}
-                  onChange={(e) =>
-                    updateConfig({
-                      launcher: { ...config.launcher, color: e.target.value },
-                    })
-                  }
-                  className="flex-1 text-sm font-normal leading-[17px] text-[#5D666F] border-0 outline-none bg-transparent"
+                  onChange={(e) => updateConfig({ launcher: { ...config.launcher, color: e.target.value } })}
+                  className="flex-1 min-w-0 border-0 outline-none bg-transparent"
+                  style={{ fontSize: 14, color: "#5D666F", fontFamily: "Inter, sans-serif" }}
                 />
               </div>
             </div>
 
-            <div className="w-full">
-              <label className="text-sm font-semibold leading-[155%] text-[#25252A] mb-2 block">
+            <div className="w-full flex flex-col gap-2">
+              <label style={{ fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: "#25252A", fontFamily: "Inter, sans-serif" }}>
                 Title
               </label>
               <input
                 type="text"
                 value={config.launcher.title}
-                onChange={(e) =>
-                  updateConfig({
-                    launcher: { ...config.launcher, title: e.target.value },
-                  })
-                }
-                className="w-full px-3 py-2 h-[38px] border border-[#DEE5EB] rounded-lg text-sm font-normal leading-[155%] text-[#25252A] bg-white"
+                onChange={(e) => updateConfig({ launcher: { ...config.launcher, title: e.target.value } })}
+                className="w-full border border-solid rounded-lg bg-white outline-none"
+                style={{ height: 36, paddingLeft: 12, paddingRight: 12, borderColor: "#DEE5EB", fontSize: 14, fontWeight: 425, color: "#25252A", fontFamily: "Inter, sans-serif" }}
                 placeholder="Ask anything"
               />
             </div>
 
-            <div className="w-full">
-              <label className="text-sm font-semibold leading-[155%] text-[#25252A] mb-2 block">
-                Subtitle
-                <span className="text-xs font-normal text-[#5D666F] ml-1">
-                  (Optional)
-                </span>
-              </label>
+            <div className="w-full flex flex-col gap-2">
+              <div className="flex flex-col">
+                <label style={{ fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: "#25252A", fontFamily: "Inter, sans-serif" }}>
+                  Subtitle
+                </label>
+                <span style={{ fontSize: 12, color: "#A1B0B7", fontFamily: "Inter, sans-serif" }}>Optional</span>
+              </div>
               <input
                 type="text"
                 value={config.launcher.subtitle || ""}
-                onChange={(e) =>
-                  updateConfig({
-                    launcher: {
-                      ...config.launcher,
-                      subtitle: e.target.value || undefined,
-                    },
-                  })
-                }
-                className="w-full px-3 py-2 h-[38px] border border-[#DEE5EB] rounded-lg text-sm font-normal leading-[155%] text-[#25252A] bg-white"
+                onChange={(e) => updateConfig({ launcher: { ...config.launcher, subtitle: e.target.value || undefined } })}
+                className="w-full border border-solid rounded-lg bg-white outline-none"
+                style={{ height: 36, paddingLeft: 12, paddingRight: 12, borderColor: "#DEE5EB", fontSize: 14, fontWeight: 425, color: "#25252A", fontFamily: "Inter, sans-serif" }}
                 placeholder="Signal, your AI Agent"
               />
             </div>
@@ -380,133 +369,113 @@ export function ConfigPanel() {
         )}
       </div>
 
-      {/* Voice Mode Section */}
-      <div className="w-full">
-        <div className="flex items-center justify-between mb-2">
-          <h2 className="text-base font-semibold leading-[155%] text-[#25252A]">
-            Voice Mode
-          </h2>
-          <label className="relative inline-flex items-center cursor-pointer">
+      {/* Voice Mode — Figma: title + description + toggle row */}
+      <div
+        className="w-full flex flex-col border-b border-solid flex-shrink-0"
+        style={{ borderColor: "#DEE5EB", paddingBottom: 12 }}
+      >
+        <div className="flex items-center justify-between w-full gap-4">
+          <div className="flex flex-col gap-0 flex-1 min-w-0">
+            <h2 style={{ fontSize: 16, fontWeight: 550, lineHeight: 1.55, color: "#25252A", margin: 0, fontFamily: "Inter, sans-serif" }}>
+              Voice Mode
+            </h2>
+            <p style={{ fontSize: 12, fontWeight: 425, lineHeight: 1.55, color: "#5D666F", margin: 0, marginTop: 2, fontFamily: "Inter, sans-serif" }}>
+              Enable real-time voice input and responses for seamless spoken interaction.
+            </p>
+          </div>
+          <label className="relative inline-flex items-center cursor-pointer flex-shrink-0" style={{ width: 24, height: 14 }}>
             <input
               type="checkbox"
               checked={config.voice.enabled}
-              onChange={(e) =>
-                updateConfig({
-                  voice: { enabled: e.target.checked },
-                })
-              }
+              onChange={(e) => updateConfig({ voice: { enabled: e.target.checked } })}
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#205AE3] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#205AE3"></div>
+            <div
+              className="rounded-full transition-colors"
+              style={{
+                width: 24,
+                height: 14,
+                backgroundColor: config.voice.enabled ? "#205AE3" : "#E5E7EB",
+              }}
+            />
+            <div
+              className="absolute rounded-full bg-white border border-[#DEE5EB] transition-all pointer-events-none"
+              style={{
+                width: 10,
+                height: 10,
+                top: 2,
+                left: config.voice.enabled ? 12 : 2,
+              }}
+            />
           </label>
         </div>
       </div>
 
-      {/* Chat Header Section */}
-      <div className="w-full">
+      {/* Chat Header — Figma accordion */}
+      <div className="w-full flex flex-col">
         <div
-          className="flex items-center justify-between mb-2 cursor-pointer"
+          className="flex items-center justify-between cursor-pointer border-b border-solid flex-shrink-0 w-full"
+          style={{ height: 69, paddingLeft: 8, paddingRight: 8, paddingTop: 12, paddingBottom: 12, borderColor: "#DEE5EB" }}
           onClick={() => toggleSection("header")}
         >
-          <h2 className="text-base font-semibold leading-[155%] text-[#25252A]">
+          <h2 style={{ fontSize: 16, fontWeight: 550, lineHeight: 1.55, color: "#25252A", fontFamily: "Inter, sans-serif" }}>
             Chat Header
           </h2>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            className={`transition-transform ${
-              expandedSections.header ? "rotate-180" : ""
-            }`}
-          >
-            <path
-              d="M6 9L12 15L18 9"
-              stroke="#000000"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+          <svg width={24} height={24} viewBox="0 0 24 24" fill="none" className={`transition-transform ${expandedSections.header ? "rotate-180" : ""}`}>
+            <path d="M6 9L12 15L18 9" stroke="#25252A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </div>
         {expandedSections.header && (
-          <div className="space-y-4 pt-6">
-            <div className="space-y-3">
-          <div>
-            <label className="text-sm font-semibold leading-[155%] text-[#25252A] mb-2 block">
-              Title
-            </label>
-            <input
-              type="text"
-              value={config.header.title}
-              onChange={(e) =>
-                updateConfig({
-                  header: { ...config.header, title: e.target.value },
-                })
-              }
-              className="w-full px-3 py-2 h-[38px] border border-[#DEE5EB] rounded-lg text-sm font-normal leading-[155%] text-[#25252A] bg-white"
-            />
-          </div>
-
-          <div>
-            <label className="text-sm font-semibold leading-[155%] text-[#25252A] mb-2 block">
-              Subtitle
-              <span className="text-xs font-normal text-[#5D666F] ml-1">
-                (Optional)
-              </span>
-            </label>
-            <input
-              type="text"
-              value={config.header.subtitle || ""}
-              onChange={(e) =>
-                updateConfig({
-                  header: {
-                    ...config.header,
-                    subtitle: e.target.value || undefined,
-                  },
-                })
-              }
-              placeholder="AI Agent"
-              className="w-full px-3 py-2 h-[38px] border border-[#DEE5EB] rounded-lg text-sm font-normal leading-[155%] text-[#25252A] bg-white"
-            />
-          </div>
-
-          <div>
-            <label className="text-sm font-semibold leading-[155%] text-[#25252A] mb-2 block">
-              Icon
-              <span className="text-xs font-normal text-[#5D666F] ml-1">
-                (Optional)
-              </span>
-            </label>
-            <label className="px-4 py-2 h-[38px] border border-[#DEE5EB] rounded-lg text-sm font-semibold leading-[155%] text-[#25252A] bg-white cursor-pointer hover:bg-gray-50 flex items-center gap-2 w-fit">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                className="text-[#25252A]"
-              >
-                <path
-                  d="M8 2V14M2 8H14"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-              Upload File
+          <div className="w-full flex flex-col gap-4 pt-2" style={{ paddingLeft: 8, paddingRight: 8, paddingTop: 8 }}>
+            <div className="w-full flex flex-col gap-2">
+              <label style={{ fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: "#25252A", fontFamily: "Inter, sans-serif" }}>
+                Title
+              </label>
               <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={(e) => {
-                  const file = e.target.files?.[0];
-                  if (file) {
-                    handleImageUpload(file, "header");
-                  }
-                }}
+                type="text"
+                value={config.header.title}
+                onChange={(e) => updateConfig({ header: { ...config.header, title: e.target.value } })}
+                className="w-full border border-solid rounded-lg bg-white outline-none"
+                style={{ height: 36, paddingLeft: 12, paddingRight: 12, borderColor: "#DEE5EB", fontSize: 14, fontWeight: 425, color: "#25252A", fontFamily: "Inter, sans-serif" }}
               />
-            </label>
-          </div>
+            </div>
+            <div className="w-full flex flex-col gap-2">
+              <div className="flex flex-col">
+                <label style={{ fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: "#25252A", fontFamily: "Inter, sans-serif" }}>Subtitle</label>
+                <span style={{ fontSize: 12, color: "#A1B0B7", fontFamily: "Inter, sans-serif" }}>Optional</span>
+              </div>
+              <input
+                type="text"
+                value={config.header.subtitle || ""}
+                onChange={(e) => updateConfig({ header: { ...config.header, subtitle: e.target.value || undefined } })}
+                placeholder="AI Agent"
+                className="w-full border border-solid rounded-lg bg-white outline-none"
+                style={{ height: 36, paddingLeft: 12, paddingRight: 12, borderColor: "#DEE5EB", fontSize: 14, fontWeight: 425, color: "#25252A", fontFamily: "Inter, sans-serif" }}
+              />
+            </div>
+            <div className="w-full flex flex-col gap-2">
+              <div className="flex flex-col">
+                <label style={{ fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: "#25252A", fontFamily: "Inter, sans-serif" }}>Icon</label>
+                <span style={{ fontSize: 12, color: "#A1B0B7", fontFamily: "Inter, sans-serif" }}>Optional</span>
+              </div>
+              <label
+                className="border border-solid rounded-lg bg-white cursor-pointer hover:bg-gray-50 flex items-center gap-2 w-fit"
+                style={{ height: 36, paddingLeft: 12, paddingRight: 12, borderColor: "#DEE5EB", fontSize: 14, fontWeight: 550, color: "#25252A", fontFamily: "Inter, sans-serif" }}
+              >
+                <svg width={16} height={16} viewBox="0 0 16 16" fill="none" style={{ color: "#25252A" }}>
+                  <path d="M8 2V14M2 8H14" stroke="currentColor" strokeWidth={1.5} strokeLinecap="round" />
+                </svg>
+                Upload File
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) => {
+                    const file = e.target.files?.[0];
+                    if (file) handleImageUpload(file, "header");
+                  }}
+                />
+              </label>
             </div>
           </div>
         )}
@@ -539,19 +508,19 @@ function ThemeCard({
   const themeInfo = {
     vibrant: {
       label: "Vibrant",
-      description: "Colorful flat design to let your colors show",
+      description: "High color usage for brand visibility.",
       color: "#205AE3",
       image: "/Vibrant.png",
     },
     minimalist: {
       label: "Minimalist",
-      description: "Light feeling design with low use of color",
+      description: "Light color usage for a soft, neutral feel.",
       color: "#25252A",
       image: "/Minimalist.png",
     },
     glass: {
       label: "Glass",
-      description: "Contemporary design with a glass-like finish",
+      description: "Modern design with a universal feel.",
       color: "#25252A",
       image: "/Glass.png",
     },
@@ -562,11 +531,14 @@ function ThemeCard({
   return (
     <button
       onClick={onClick}
-      className={`flex flex-col items-start p-3 gap-2 flex-1 h-[164px] bg-white rounded-lg transition-all ${
-        isSelected
-          ? "border-2 border-[#205AE3]"
-          : "border border-[#DEE5EB]"
+      className={`flex flex-col items-start flex-1 min-h-0 bg-white rounded-lg transition-all ${
+        isSelected ? "border-2 border-[#205AE3]" : "border border-[#DEE5EB]"
       }`}
+      style={{
+        padding: "12px 16px",
+        gap: 8,
+        fontFamily: "Inter, sans-serif",
+      }}
     >
       <div className="w-full flex-1 min-h-0 bg-white border border-[#DEE5EB] rounded overflow-hidden">
         <img
@@ -580,15 +552,11 @@ function ThemeCard({
           }}
         />
       </div>
-      <div className="flex flex-col items-start w-full flex-shrink-0">
-        <p
-          className={`text-sm font-semibold leading-[155%] text-left ${
-            isSelected ? "text-[#205AE3]" : "text-[#25252A]"
-          }`}
-        >
+      <div className="flex flex-col items-start w-full flex-shrink-0 text-left">
+        <p style={{ fontSize: 14, fontWeight: 550, lineHeight: 1.55, color: isSelected ? "#205AE3" : "#25252A", textAlign: "left" }}>
           {info.label}
         </p>
-        <p className="text-xs font-normal leading-[155%] text-[#5D666F] text-left">
+        <p style={{ fontSize: 12, fontWeight: 425, lineHeight: 1.55, color: "#5D666F", textAlign: "left" }}>
           {info.description}
         </p>
       </div>

@@ -28,15 +28,10 @@ function App() {
 
         {/* Main Content Area */}
         <div className="flex-1 flex overflow-hidden">
-          {/* Left Panel - Configuration */}
-          <div 
+          {/* Left Panel - Configuration (Figma 996:25324: padding 12px) */}
+          <div
             className="w-[700px] flex-shrink-0 overflow-y-auto bg-[#F8F9FA]"
-            style={{
-              paddingTop: "1.25rem",    // 20px
-              paddingRight: "1.25rem",   // 20px
-              paddingBottom: "1.25rem",  // 20px
-              paddingLeft: "1.25rem",    // 20px
-            }}
+            style={{ padding: 12 }}
           >
             <ConfigPanel />
           </div>

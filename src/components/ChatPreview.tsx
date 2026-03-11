@@ -3,6 +3,7 @@ import { useWidgetConfig } from "../context/WidgetConfigContext";
 import { setRoundnessVars } from "../theme/roundness";
 import { Launcher } from "./Launcher";
 import { ChatWidgetShell } from "./ChatWidgetShell";
+import { TestLiveModal } from "./TestLiveModal";
 
 type PreviewTab = "chat" | "launcher" | "form" | "voice";
 
@@ -71,8 +72,8 @@ export function ChatPreview() {
     setRoundnessVars(config.roundness);
   }, [config.roundness]);
 
-  // Placeholder handlers — wire functionality later
-  const onTestLive = () => { /* placeholder */ };
+  const [testLiveOpen, setTestLiveOpen] = useState(false);
+  const onTestLive = () => setTestLiveOpen(true);
   const onEmbedCode = () => { /* placeholder */ };
 
   return (
@@ -199,6 +200,8 @@ export function ChatPreview() {
           })}
         </div>
       </div>
+
+      <TestLiveModal open={testLiveOpen} onClose={() => setTestLiveOpen(false)} config={config} />
 
       {/* Preview Area — no wallpaper */}
       <div 

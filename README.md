@@ -26,10 +26,24 @@ npm install
 npm run dev
 ```
 
+**Test Live (remote browser):** Runs the backend (Playwright + MJPEG stream + WebSocket input) and the Vite dev server so you can use “Test Live” from the preview.
+
+```bash
+npm run build:widget   # build injectable widget once
+npm run server         # in one terminal: backend on :3001
+npm run dev            # in another: Vite on :5173
+```
+
+Or use `npm run dev:all` to build the widget and start both server and Vite together (requires `concurrently`).
+
+- **Backend:** `POST /api/config-snapshots`, `POST /api/test-live/sessions`, `GET /api/test-live/sessions/:id/stream` (MJPEG), `WS /api/test-live/input?sessionId=:id` for input forwarding. Sessions expire after 10 minutes; rate limit 3 sessions per IP.
+- **Flow:** Click “Test Live” → enter URL → server launches headless Chromium, opens the URL, injects the widget script, and streams the viewport as MJPEG. You interact via the stream (mouse/keyboard sent over WebSocket). No iframes or browser extension.
+
 ### Build
 
 ```bash
 npm run build
+npm run build:widget    # optional: build injectable widget for Test Live
 ```
 
 ### Test
