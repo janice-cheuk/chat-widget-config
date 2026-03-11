@@ -53,7 +53,15 @@ export function LauncherControls({
           ))}
         </div>
         {icon === "custom" && (
-          <div className="mt-2">
+          <div className="mt-2 flex flex-col gap-2">
+            <input
+              type="url"
+              value={customIconUrl ?? ""}
+              onChange={(e) => onCustomIconUrlChange(e.target.value)}
+              placeholder="Paste icon URL (SVG recommended)"
+              className="w-full border border-solid rounded-lg bg-white outline-none"
+              style={inputStyle}
+            />
             <label
               className="border border-solid rounded-lg bg-white cursor-pointer hover:bg-gray-50 flex items-center gap-2 w-fit"
               style={{ ...inputStyle, fontWeight: 550 }}

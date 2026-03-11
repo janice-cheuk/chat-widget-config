@@ -3,7 +3,6 @@
  * Query params: configToken, apiBase (e.g. https://our-server.com)
  * Fetches config from apiBase/api/config-snapshots/:token and mounts the chat widget.
  */
-import React from "react";
 import { createRoot } from "react-dom/client";
 import { WidgetConfigProvider } from "./context/WidgetConfigContext";
 import { ChatWidgetShell } from "./components/ChatWidgetShell";

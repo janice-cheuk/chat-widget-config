@@ -122,7 +122,7 @@ describe("widgetColors", () => {
       const tokens = buildWidgetColorTokens("#205AE3", "#FFFFFF");
       expect(tokens).toHaveProperty("neutralInactive");
       expect(tokens).toHaveProperty("inputBg");
-      expect(tokens).toHaveProperty("inputBorder");
+      expect(tokens).toHaveProperty("inputStroke");
       expect(tokens).toHaveProperty("inputText");
       expect(tokens).toHaveProperty("inputPlaceholder");
       expect(tokens).toHaveProperty("inputFocusOutline");
@@ -140,7 +140,7 @@ describe("widgetColors", () => {
       const tokens = buildWidgetColorTokens("#205AE3", "#FFFFFF");
       expect(tokens.neutralInactive).toBe("rgba(222, 229, 235, 1)");
       expect(tokens.inputBg).toBe("rgba(222, 229, 235, 1)");
-      expect(tokens.inputBorder).toBe("rgba(222, 229, 235, 1)");
+      expect(tokens.inputStroke).toBe("rgba(222, 229, 235, 1)");
       expect(tokens.sendBg).toBe("rgba(222, 229, 235, 1)");
     });
 
@@ -169,7 +169,7 @@ describe("widgetColors", () => {
       const neutral = "rgba(222, 229, 235, 1)";
       [tokens1, tokens2, tokens3].forEach((tokens) => {
         expect(tokens.inputBg).toBe(neutral);
-        expect(tokens.inputBorder).toBe(neutral);
+        expect(tokens.inputStroke).toBe(neutral);
         expect(tokens.sendBg).toBe(neutral);
       });
     });

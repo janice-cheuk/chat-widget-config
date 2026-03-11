@@ -120,10 +120,6 @@ export function ImageCropModal({
     const containerWidth = containerRect.width;
     const containerHeight = containerRect.height;
 
-    // Get image element position and dimensions
-    const imageRect = imageRef.current.getBoundingClientRect();
-    const imageLeft = imageRect.left - containerRect.left;
-    const imageTop = imageRect.top - containerRect.top;
     const scaledImageWidth = imageDimensions.width * scale;
     const scaledImageHeight = imageDimensions.height * scale;
 

@@ -286,39 +286,9 @@ export type WidgetColorTokens = {
 const INTERACTIVE_BLUE = "#3578E5";
 
 /**
- * Fallback stroke color for input/send when neutral inactive cannot meet contrast
- */
-const FALLBACK_STROKE_BASE = "#9AA6B2";
-
-/**
  * Builds widget color tokens based on brand color and surface background
  * Enforces WCAG contrast requirements and product-specific rules
  */
-/**
- * Computes a stroke color that ensures >= 3:1 contrast against surface
- * Uses the base color, darkens it if needed, or falls back to FALLBACK_STROKE_BASE
- */
-function computeStrokeColor(
-  baseColor: string,
-  surfaceBg: string
-): string {
-  // Check if base color already meets 3:1 contrast
-  const baseContrast = contrastRatio(baseColor, surfaceBg);
-  if (baseContrast >= 3) {
-    return baseColor; // No stroke needed, but return base for consistency
-  }
-
-  // Try to darken base color to meet 3:1
-  const darkenedResult = ensureMinContrast(baseColor, surfaceBg, 3, 40);
-  if (darkenedResult.achieved >= 3) {
-    return darkenedResult.color;
-  }
-
-  // If still < 3:1, use fallback stroke color darkened until it meets 3:1
-  const fallbackResult = ensureMinContrast(FALLBACK_STROKE_BASE, surfaceBg, 3, 40);
-  return fallbackResult.color;
-}
-
 export function buildWidgetColorTokens(
   brandColor: string,
   surfaceBg: string = "#FFFFFF"

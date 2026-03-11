@@ -1,7 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import { Launcher } from "../components/Launcher";
-import type { LauncherIcon, LauncherVisibility } from "../components/Launcher";
 
 describe("Launcher", () => {
   beforeEach(() => {
@@ -39,7 +38,7 @@ describe("Launcher", () => {
 
   describe("Visibility modes", () => {
     it("renders as pill when visibility is prominent", () => {
-      render(<Launcher visibility="prominent" label="Test" />);
+      render(<Launcher visibility="prominent" title="Test" />);
       const button = screen.getByRole("button");
       expect(button).toHaveClass("h-11", "px-3", "rounded-full");
       expect(button).toHaveTextContent("Test");
@@ -53,7 +52,7 @@ describe("Launcher", () => {
     });
 
     it("starts as pill and transitions to circle after 5s in hybrid mode", async () => {
-      render(<Launcher visibility="hybrid" label="Test" />);
+      render(<Launcher visibility="hybrid" title="Test" />);
       const button = screen.getByRole("button");
       
       // Should start as pill
@@ -70,7 +69,7 @@ describe("Launcher", () => {
     });
 
     it("resets timer on mouse enter in hybrid mode", async () => {
-      render(<Launcher visibility="hybrid" label="Test" />);
+      render(<Launcher visibility="hybrid" title="Test" />);
       const button = screen.getByRole("button");
 
       // Fast-forward 4 seconds
@@ -125,7 +124,7 @@ describe("Launcher", () => {
 
   describe("Accessibility", () => {
     it("has proper aria-label", () => {
-      render(<Launcher visibility="prominent" label="Ask anything" />);
+      render(<Launcher visibility="prominent" title="Ask anything" />);
       const button = screen.getByRole("button");
       expect(button).toHaveAttribute("aria-label", "Open chat: Ask anything");
     });
@@ -149,7 +148,6 @@ describe("Launcher", () => {
 
   describe("Reduced motion", () => {
     it("respects prefers-reduced-motion", () => {
-      const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
       Object.defineProperty(window, "matchMedia", {
         writable: true,
         value: vi.fn().mockImplementation((query) => ({
